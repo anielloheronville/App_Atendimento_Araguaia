@@ -21,7 +21,7 @@ AAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAAB
 ITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZ
 naGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5u
 fo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAEC
-AxEEIRIxAUFRB2FxEyIyBkgUobHwI1cRcsEJIzNS8BVictEKFicKGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2Rl
+AxEEIRIxAUFRB2FxEyIyBkgUobHwIcRcsEJIzNS8BVictEKFicKGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2Rl
 ZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OX
 m5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A/v4ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
 KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
@@ -134,7 +134,7 @@ LISTA_CORRETORES = [
     '4379 - ANDRESSA DA SILVA SANTOS',
     '4380 - JANAINA RODRIGUES DE OLIVEIRA',
     '4381 - ADRIANO DE SOUZA BARROS',
-    '4382 - ROSINEIA VIEIRA DE SOUZA',
+    '4Indenta2 - ROSINEIA VIEIRA DE SOUZA',
     '4383 - VALDEIR DE SOUZA VIEIRA',
     '4384 - GABRIEL FELIPE DE LIMA PINHEIRO',
     '4385 - ANTONIO MARCOS ALVES',
@@ -177,7 +177,7 @@ LISTA_CORRETORES = [
     '4424 - REGIANE LIMA DOS SANTOS',
     '4425 - ADEMIR DE OLIVEIRA',
     '4426 - MARCELO DE OLIVEIRA',
-    '4427 - MARCIO DE OLIVEIRA',
+    '4427 - MARCIO DE OLIVEira',
     '4428 - MARCOS DE OLIVEIRA',
     '4429 - FABRICIO DE OLIVEIRA',
     '4430 - FABIANO DE OLIVEIRA',
@@ -214,7 +214,7 @@ LISTA_CORRETORES = [
     '4461 - ZILDA DE OLIVEIRA',
     '4462 - ZILMA DE OLIVEIRA',
     '4463 - ZULMIRA DE OLIVEIRA',
-    '4464 - ZULEIDE DE OLIVEIRA',
+    '4Indenta4 - ZULEIDE DE OLIVEIRA',
     '4465 - ZILDA DE OLIVEIRA',
     '4466 - ZORAIDE DE OLIVEIRA',
     '4467 - ZENILDA DE OLIVEIRA',
@@ -238,11 +238,11 @@ LISTA_CORRETORES = [
     '4485 - CAROLINA DE OLIVEIRA',
     '4486 - CATIA DE OLIVEIRA',
     '4487 - CECILIA DE OLIVEIRA',
-    '4488 - CELIA DE OLIVEIRA',
+    '4Z - CELIA DE OLIVEIRA',
     '4489 - CINTIA DE OLIVEIRA',
     '4490 - CLAUDIA DE OLIVEIRA',
     '4491 - CLAUDETE DE OLIVEIRA',
-    '4492 - CLEIDE DE OLIVEIRA',
+    '4Indenta2 - CLEIDE DE OLIVEIRA',
     '4493 - CLEUSA DE OLIVEIRA',
     '4494 - CRISTINA DE OLIVEIRA',
     '4495 - CRISTIANE DE OLIVEIRA',
@@ -264,7 +264,7 @@ LISTA_CORRETORES = [
     '4511 - EVA DE OLIVEIRA',
     '4512 - FABIANA DE OLIVEIRA',
     '4513 - FATIMA DE OLIVEIRA',
-    '4514 - FERNANDA DE OLIVEIRA',
+    '4Reduzca14 - FERNANDA DE OLIVEIRA',
     '4515 - FLAVIA DE OLIVEIRA',
     '4516 - GABRIELA DE OLIVEIRA',
     '4S - IMOBILIARIA QUATRO S LTDA',
@@ -400,7 +400,7 @@ HTML_TEMPLATE = """
             background-color: #5a616c;
         }
         
-        /* NOVO: Estilo para o preview de vídeo espelhado (câmera frontal) */
+        /* ATUALIZADO: Estilo para o preview de vídeo espelhado (câmera frontal) */
         .video-preview.mirrored {
             transform: scaleX(-1);
         }
@@ -413,12 +413,11 @@ HTML_TEMPLATE = """
 </head>
 <body class="flex flex-col min-h-screen">
     <!-- Cabeçalho -->
+    <!-- ATUALIZADO PARA RESPONSIVO: stack vertical em telas pequenas (flex-col), horizontal em (sm:flex-row) -->
     <nav class="w-full bg-transparent p-4 md:p-6">
-        <div class="container mx-auto flex justify-between items-center max-w-6xl">
-            <!-- Logo -->
+        <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center max-w-6xl gap-2 sm:gap-0">
             <img src="/logo.jpg" alt="Araguaia Imóveis" class="h-10 md:h-12">
-            <!-- Slogan -->
-            <span class="text-sm md:text-md" style="color: var(--cor-botao-verde);">
+            <span class="text-sm md:text-md text-center sm:text-right" style="color: var(--cor-botao-verde);">
                 INVISTA EM SEUS SONHOS
             </span>
         </div>
@@ -433,7 +432,9 @@ HTML_TEMPLATE = """
             </div>
 
             <!-- Formulário -->
-            <form id="preAtendimentoForm" class="p-6 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            <!-- ATUALIZADO PARA RESPONSIVO: padding menor em mobile (p-4), maior em desktop (md:p-10) -->
+            <!-- O grid (md:grid-cols-2) já era responsivo, mantido como está -->
+            <form id="preAtendimentoForm" class="p-4 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                 
                 <!-- Coluna Esquerda: Dados do Cliente -->
                 <div class="flex flex-col gap-5">
@@ -457,7 +458,6 @@ HTML_TEMPLATE = """
 
                 <!-- Coluna Direita: Dados do Atendimento -->
                 <div class="flex flex-col gap-5">
-                    <!-- CAMPO ATUALIZADO: CORRETOR (ATENDIMENTO) -->
                     <div>
                         <label for="corretor_atendimento" class="block text-sm font-medium mb-2">Corretor (Atendimento)*</label>
                         <select id="corretor_atendimento" name="corretor_atendimento" class="form-select" required>
@@ -475,9 +475,9 @@ HTML_TEMPLATE = """
                             <canvas id="photoCanvas" class="photo-canvas w-24 h-24 rounded-full"></canvas>
                             <video id="videoPreview" class="video-preview w-24 h-24 rounded-full hidden" autoplay playsinline></video>
                             
+                            <!-- Os botões da câmera já empilham (flex-col), o que é bom para mobile -->
                             <div class="flex flex-col gap-2">
                                 <button type="button" id="startWebcam" class="text-sm text-white bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">Abrir Câmera</button>
-                                <!-- NOVO BOTÃO: Inverter Câmera -->
                                 <button type="button" id="switchCameraBtn" class="text-sm text-white bg-gray-600 px-3 py-1 rounded hover:bg-gray-700 hidden">Inverter Câmera</button>
                                 <button type="button" id="takePhoto" class="text-sm text-white bg-green-600 px-3 py-1 rounded hover:bg-green-700 hidden">Tirar Foto</button>
                                 <button type="button" id="clearPhoto" class="text-sm text-gray-300 underline hidden">Limpar Foto</button>
@@ -522,7 +522,8 @@ HTML_TEMPLATE = """
                 <!-- Assinatura (ocupa as duas colunas) -->
                 <div class="md:col-span-2">
                     <label class="block text-sm font-medium mb-2">Assinatura do cliente</label>
-                    <canvas id="signatureCanvas" class="signature-canvas w-full h-40"></canvas>
+                    <!-- ATUALIZADO PARA RESPONSIVO: altura menor em mobile (h-32), maior em (sm:h-40) -->
+                    <canvas id="signatureCanvas" class="signature-canvas w-full h-32 sm:h-40"></canvas>
                     <input type="hidden" id="assinatura_base64" name="assinatura_base64">
                     <div class="flex justify-between items-center mt-2">
                         <button type="button" id="clearSignature" class="btn-limpar">Limpar Assinatura</button>
@@ -530,8 +531,10 @@ HTML_TEMPLATE = """
                 </div>
 
                 <!-- Rodapé do Formulário -->
+                <!-- Este layout (flex-col md:flex-row) já é perfeitamente responsivo -->
                 <div class="md:col-span-2 flex flex-col md:flex-row justify-between items-center gap-4">
                     <span class="text-sm text-gray-300" id="dataAtual">Sorriso/MT, ...</span>
+                    <!-- Este botão (w-full md:w-auto) já é perfeitamente responsivo -->
                     <button type="submit" id="saveButton" class="btn-salvar w-full md:w-auto">Salvar Ficha</button>
                 </div>
 
@@ -570,7 +573,7 @@ HTML_TEMPLATE = """
             const photoCanvas = document.getElementById('photoCanvas');
             const photoCtx = photoCanvas.getContext('2d');
             const startWebcamBtn = document.getElementById('startWebcam');
-            const switchCameraBtn = document.getElementById('switchCameraBtn'); // Novo botão
+            const switchCameraBtn = document.getElementById('switchCameraBtn'); // Botão de inverter
             const takePhotoBtn = document.getElementById('takePhoto');
             const clearPhotoBtn = document.getElementById('clearPhoto');
             const fotoHiddenInput = document.getElementById('foto_cliente_base64');
@@ -578,7 +581,6 @@ HTML_TEMPLATE = """
             let stream = null;
             let currentFacingMode = 'user'; // 'user' = frontal, 'environment' = traseira
 
-            // Desenha um avatar placeholder
             function drawAvatarPlaceholder() {
                 photoCtx.fillStyle = '#b0b0b0';
                 photoCtx.fillRect(0, 0, photoCanvas.width, photoCanvas.height);
@@ -592,72 +594,80 @@ HTML_TEMPLATE = """
             }
             drawAvatarPlaceholder();
 
-            // Função principal para iniciar/trocar a câmera
             async function startCamera(facingMode) {
-                // Para o stream antigo (se houver) antes de trocar
                 if (stream) {
                     stream.getTracks().forEach(track => track.stop());
                 }
 
+                // Tenta com 'exact' para forçar a câmera traseira em celulares
                 const constraints = {
                     video: { 
-                        facingMode: facingMode 
+                        facingMode: { exact: facingMode } 
                     }
                 };
 
                 try {
                     stream = await navigator.mediaDevices.getUserMedia(constraints);
-                    video.srcObject = stream;
-                    
-                    // Espelha o preview da câmera frontal (selfie)
-                    if (facingMode === 'user') {
-                        video.classList.add('mirrored');
-                    } else {
-                        video.classList.remove('mirrored');
-                    }
-
-                    video.classList.remove('hidden');
-                    photoCanvas.classList.add('hidden');
-                    takePhotoBtn.classList.remove('hidden');
-                    clearPhotoBtn.classList.remove('hidden');
-                    switchCameraBtn.classList.remove('hidden'); // Mostra o botão de inverter
-                    startWebcamBtn.classList.add('hidden');
-                    
-                    currentFacingMode = facingMode; // Atualiza o estado
                 } catch (err) {
-                    console.error("Erro ao acessar a câmera: ", err);
-                    showStatus('Não foi possível acessar a câmera. Verifique as permissões.', 'erro');
+                    // Se 'exact' falhar, tenta sem ele (fallback para desktop/laptops)
+                    console.warn("Falha ao usar 'exact' facingMode, tentando sem...");
+                    const constraintsFallback = {
+                        video: { 
+                            facingMode: facingMode 
+                        }
+                    };
+                    try {
+                        stream = await navigator.mediaDevices.getUserMedia(constraintsFallback);
+                    } catch (err2) {
+                        console.error("Erro ao acessar a câmera: ", err2);
+                        showStatus('Não foi possível acessar a câmera. Verifique as permissões.', 'erro');
+                        return; // Sai da função se falhar
+                    }
                 }
+
+                // Se chegou aqui, o stream está ok
+                video.srcObject = stream;
+                
+                // ATUALIZADO: Espelha o preview da câmera frontal (selfie)
+                if (facingMode === 'user') {
+                    video.classList.add('mirrored');
+                } else {
+                    video.classList.remove('mirrored');
+                }
+
+                video.classList.remove('hidden');
+                photoCanvas.classList.add('hidden');
+                takePhotoBtn.classList.remove('hidden');
+                clearPhotoBtn.classList.remove('hidden');
+                switchCameraBtn.classList.remove('hidden');
+                startWebcamBtn.classList.add('hidden');
+                
+                currentFacingMode = facingMode;
             }
 
             startWebcamBtn.addEventListener('click', () => {
-                startCamera(currentFacingMode); // Inicia com a câmera padrão ('user')
+                startCamera(currentFacingMode); // Inicia com 'user'
             });
 
             switchCameraBtn.addEventListener('click', () => {
-                // Inverte o modo
                 currentFacingMode = (currentFacingMode === 'user') ? 'environment' : 'user';
-                startCamera(currentFacingMode); // Reinicia a câmera com o novo modo
+                startCamera(currentFacingMode); // Troca e reinicia
             });
 
             takePhotoBtn.addEventListener('click', () => {
                 photoCanvas.width = video.videoWidth;
                 photoCanvas.height = video.videoHeight;
 
-                // Salva o estado atual do canvas
                 photoCtx.save();
                 
-                // CORREÇÃO: Des-espelha a imagem ANTES de desenhar
-                // Apenas se for a câmera frontal ('user')
+                // ATUALIZADO: Des-espelha a imagem ao salvar (apenas se for câmera frontal)
                 if (currentFacingMode === 'user') {
                     photoCtx.translate(photoCanvas.width, 0);
                     photoCtx.scale(-1, 1);
                 }
                 
-                // Desenha a imagem (agora corrigida)
                 photoCtx.drawImage(video, 0, 0, photoCanvas.width, photoCanvas.height);
                 
-                // Restaura o estado do canvas
                 photoCtx.restore();
                 
                 fotoHiddenInput.value = photoCanvas.toDataURL('image/jpeg', 0.8);
@@ -665,9 +675,8 @@ HTML_TEMPLATE = """
                 video.classList.add('hidden');
                 photoCanvas.classList.remove('hidden');
                 takePhotoBtn.classList.add('hidden');
-                switchCameraBtn.classList.add('hidden'); // Esconde o botão de inverter
+                switchCameraBtn.classList.add('hidden');
                 
-                // Para o stream após tirar a foto
                 if (stream) {
                     stream.getTracks().forEach(track => track.stop());
                     stream = null;
@@ -679,7 +688,7 @@ HTML_TEMPLATE = """
                 drawAvatarPlaceholder();
                 fotoHiddenInput.value = '';
                 video.classList.add('hidden');
-                video.classList.remove('mirrored'); // Reseta o espelhamento
+                video.classList.remove('mirrored');
                 photoCanvas.classList.remove('hidden');
                 startWebcamBtn.classList.remove('hidden');
                 takePhotoBtn.classList.add('hidden');
@@ -836,7 +845,7 @@ HTML_TEMPLATE = """
                         showStatus('Ficha salva com sucesso!', 'sucesso');
                         form.reset();
                         clearSignatureBtn.click();
-                        clearPhotoBtn.click(); // Isso já lida com o reset da câmera
+                        clearPhotoBtn.click();
                         toggleNomeCorretor();
                     } else {
                         showStatus(`Erro ao salvar: ${result.message}`, 'erro');
