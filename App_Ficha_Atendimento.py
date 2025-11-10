@@ -11,50 +11,10 @@ app = Flask(__name__)
 # --- Variável de Ambiente do Banco de Dados ---
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
-# --- Dados do Logo (embutido) ---
-# A string está formatada com aspas triplas (""") para
-# evitar TODOS os erros de "copiar e colar" e sintaxe.
-LOGO_BASE64_STRING = """/9j/4AAQSkZJRgABAQEAYABgAAD/4QAiRXhpZgAATU0AKgAAAAgAAQESAAMAAAABAAEAAAAAAAD/2wBDAAIBAQIBAQIB
-AQQCAQIEAgICAgQDAgICAgUEBAMEBgUGBgYFBgYGBwkIBgcJBwYGCAsICQoKCgoKBgcLDAsKDAwL/wBDAQICAgQDBAUD
-BgYFBAQGBQcFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQU/8AAEQgB9AH0AwEi
-AAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUS
-ITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZ
-naGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5u
-fo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAEC
-AxEEIRIxAUFRB2FxEyIyBkgUobHwIcRcsEJIzNS8BVictEKFicKGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2Rl
-ZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OX
-m5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A/v4ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-CreationKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoooo
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
-ServicKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/9k="""
+# --- DADOS DO LOGO (REMOVIDO) ---
+# A variável LOGO_BASE64_STRING foi removida pois o logo agora é texto HTML.
 
-# --- LISTA DE CORRETORES (extraída do CSV) ---
-# Esta lista está limpa e não contém erros como '4Instal7'
+# --- LISTA DE CORRETORES ---
 LISTA_CORRETORES = [
     '1376 - VALMIR MARIO TOMASI - SEGALA EMPREENDIMENTOS IMOBILIÁRIOS EIRELI',
     '2796 - PEDRO LAERTE RABECINI',
@@ -134,7 +94,7 @@ LISTA_CORRETORES = [
     '4379 - ANDRESSA DA SILVA SANTOS',
     '4380 - JANAINA RODRIGUES DE OLIVEIRA',
     '4381 - ADRIANO DE SOUZA BARROS',
-    '4Indenta2 - ROSINEIA VIEIRA DE SOUZA',
+    '4382 - ROSINEIA VIEIRA DE SOUZA',
     '4383 - VALDEIR DE SOUZA VIEIRA',
     '4384 - GABRIEL FELIPE DE LIMA PINHEIRO',
     '4385 - ANTONIO MARCOS ALVES',
@@ -177,7 +137,7 @@ LISTA_CORRETORES = [
     '4424 - REGIANE LIMA DOS SANTOS',
     '4425 - ADEMIR DE OLIVEIRA',
     '4426 - MARCELO DE OLIVEIRA',
-    '4427 - MARCIO DE OLIVEira',
+    '4427 - MARCIO DE OLIVEIRA',
     '4428 - MARCOS DE OLIVEIRA',
     '4429 - FABRICIO DE OLIVEIRA',
     '4430 - FABIANO DE OLIVEIRA',
@@ -203,7 +163,7 @@ LISTA_CORRETORES = [
     '4450 - VALDINEI DE OLIVEIRA',
     '4451 - VALMIR DE OLIVEIRA',
     '4452 - VALTER DE OLIVEIRA',
-    '4Address - VANILDO DE OLIVEIRA',
+    '4453 - VANILDO DE OLIVEIRA',
     '4454 - VILSON DE OLIVEIRA',
     '4455 - ZENILDO DE OLIVEIRA',
     '4456 - ZENIR DE OLIVEIRA',
@@ -214,7 +174,7 @@ LISTA_CORRETORES = [
     '4461 - ZILDA DE OLIVEIRA',
     '4462 - ZILMA DE OLIVEIRA',
     '4463 - ZULMIRA DE OLIVEIRA',
-    '4Indenta4 - ZULEIDE DE OLIVEIRA',
+    '4464 - ZULEIDE DE OLIVEIRA',
     '4465 - ZILDA DE OLIVEIRA',
     '4466 - ZORAIDE DE OLIVEIRA',
     '4467 - ZENILDA DE OLIVEIRA',
@@ -225,7 +185,7 @@ LISTA_CORRETORES = [
     '4472 - ANDREIA DE OLIVEIRA',
     '4473 - ALZIRA DE OLIVEIRA',
     '4474 - AMANDA DE OLIVEIRA',
-    '4Music - APARECIDA DE OLIVEIRA',
+    '4475 - APARECIDA DE OLIVEIRA',
     '4476 - ARIANE DE OLIVEIRA',
     '4477 - AUGUSTA DE OLIVEIRA',
     '4478 - AUREA DE OLIVEIRA',
@@ -238,11 +198,11 @@ LISTA_CORRETORES = [
     '4485 - CAROLINA DE OLIVEIRA',
     '4486 - CATIA DE OLIVEIRA',
     '4487 - CECILIA DE OLIVEIRA',
-    '4Z - CELIA DE OLIVEIRA',
+    '4488 - CELIA DE OLIVEIRA',
     '4489 - CINTIA DE OLIVEIRA',
     '4490 - CLAUDIA DE OLIVEIRA',
     '4491 - CLAUDETE DE OLIVEIRA',
-    '4Indenta2 - CLEIDE DE OLIVEIRA',
+    '4492 - CLEIDE DE OLIVEIRA',
     '4493 - CLEUSA DE OLIVEIRA',
     '4494 - CRISTINA DE OLIVEIRA',
     '4495 - CRISTIANE DE OLIVEIRA',
@@ -255,7 +215,7 @@ LISTA_CORRETORES = [
     '4502 - DULCE DE OLIVEIRA',
     '4503 - EDNA DE OLIVEIRA',
     '4504 - ELAINE DE OLIVEIRA',
-    '4Music - ELIANE DE OLIVEIRA',
+    '4505 - ELIANE DE OLIVEIRA',
     '4506 - ELISANGELA DE OLIVEIRA',
     '4507 - ELZA DE OLIVEIRA',
     '4508 - ERICA DE OLIVEIRA',
@@ -264,7 +224,7 @@ LISTA_CORRETORES = [
     '4511 - EVA DE OLIVEIRA',
     '4512 - FABIANA DE OLIVEIRA',
     '4513 - FATIMA DE OLIVEIRA',
-    '4Reduzca14 - FERNANDA DE OLIVEIRA',
+    '4514 - FERNANDA DE OLIVEIRA',
     '4515 - FLAVIA DE OLIVEIRA',
     '4516 - GABRIELA DE OLIVEIRA',
     '4S - IMOBILIARIA QUATRO S LTDA',
@@ -286,7 +246,6 @@ def init_db():
         print("A variável de ambiente DATABASE_URL não está definida. O banco de dados não pode ser inicializado.")
         return
 
-    # A sintaxe de criação da tabela
     create_table_query = """
     CREATE TABLE IF NOT EXISTS atendimentos (
         id SERIAL PRIMARY KEY,
@@ -305,7 +264,6 @@ def init_db():
     )
     """
     
-    # Este comando ALTER TABLE é CRUCIAL para produção.
     alter_table_query = """
     ALTER TABLE atendimentos ADD COLUMN IF NOT EXISTS corretor_atendimento TEXT;
     """
@@ -366,7 +324,6 @@ HTML_TEMPLATE = """
             padding: 0.75rem;
             width: 100%;
         }
-        /* Cor do texto do placeholder no select */
         .form-select:invalid {
             color: var(--cor-texto-medio);
         }
@@ -399,13 +356,9 @@ HTML_TEMPLATE = """
             border-radius: 0.375rem;
             background-color: #5a616c;
         }
-        
-        /* ATUALIZADO: Estilo para o preview de vídeo espelhado (câmera frontal) */
         .video-preview.mirrored {
             transform: scaleX(-1);
         }
-        
-        /* Ocultar elementos */
         .hidden {
             display: none;
         }
@@ -413,10 +366,17 @@ HTML_TEMPLATE = """
 </head>
 <body class="flex flex-col min-h-screen">
     <!-- Cabeçalho -->
-    <!-- ATUALIZADO PARA RESPONSIVO: stack vertical em telas pequenas (flex-col), horizontal em (sm:flex-row) -->
     <nav class="w-full bg-transparent p-4 md:p-6">
         <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center max-w-6xl gap-2 sm:gap-0">
-            <img src="/logo.jpg" alt="Araguaia Imóveis" class="h-10 md:h-12">
+            
+            <!-- ATUALIZAÇÃO DO LOGO: Imagem substituída por texto HTML para legibilidade -->
+            <div class="text-left">
+                <!-- O "telhado" é simulado com uma borda verde -->
+                <div class="h-2 w-20 bg-green-500 rounded-t-lg" style="background-color: #84cc16;"></div>
+                <h1 class="text-2xl font-bold text-white leading-none -mt-1">Araguaia <span class="font-light">Imóveis</span></h1>
+                <span class="text-xs text-gray-400">CRECI - J MT 1169</span>
+            </div>
+            
             <span class="text-sm md:text-md text-center sm:text-right" style="color: var(--cor-botao-verde);">
                 INVISTA EM SEUS SONHOS
             </span>
@@ -432,8 +392,6 @@ HTML_TEMPLATE = """
             </div>
 
             <!-- Formulário -->
-            <!-- ATUALIZADO PARA RESPONSIVO: padding menor em mobile (p-4), maior em desktop (md:p-10) -->
-            <!-- O grid (md:grid-cols-2) já era responsivo, mantido como está -->
             <form id="preAtendimentoForm" class="p-4 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                 
                 <!-- Coluna Esquerda: Dados do Cliente -->
@@ -475,7 +433,6 @@ HTML_TEMPLATE = """
                             <canvas id="photoCanvas" class="photo-canvas w-24 h-24 rounded-full"></canvas>
                             <video id="videoPreview" class="video-preview w-24 h-24 rounded-full hidden" autoplay playsinline></video>
                             
-                            <!-- Os botões da câmera já empilham (flex-col), o que é bom para mobile -->
                             <div class="flex flex-col gap-2">
                                 <button type="button" id="startWebcam" class="text-sm text-white bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">Abrir Câmera</button>
                                 <button type="button" id="switchCameraBtn" class="text-sm text-white bg-gray-600 px-3 py-1 rounded hover:bg-gray-700 hidden">Inverter Câmera</button>
@@ -522,7 +479,6 @@ HTML_TEMPLATE = """
                 <!-- Assinatura (ocupa as duas colunas) -->
                 <div class="md:col-span-2">
                     <label class="block text-sm font-medium mb-2">Assinatura do cliente</label>
-                    <!-- ATUALIZADO PARA RESPONSIVO: altura menor em mobile (h-32), maior em (sm:h-40) -->
                     <canvas id="signatureCanvas" class="signature-canvas w-full h-32 sm:h-40"></canvas>
                     <input type="hidden" id="assinatura_base64" name="assinatura_base64">
                     <div class="flex justify-between items-center mt-2">
@@ -531,10 +487,8 @@ HTML_TEMPLATE = """
                 </div>
 
                 <!-- Rodapé do Formulário -->
-                <!-- Este layout (flex-col md:flex-row) já é perfeitamente responsivo -->
                 <div class="md:col-span-2 flex flex-col md:flex-row justify-between items-center gap-4">
                     <span class="text-sm text-gray-300" id="dataAtual">Sorriso/MT, ...</span>
-                    <!-- Este botão (w-full md:w-auto) já é perfeitamente responsivo -->
                     <button type="submit" id="saveButton" class="btn-salvar w-full md:w-auto">Salvar Ficha</button>
                 </div>
 
@@ -573,7 +527,7 @@ HTML_TEMPLATE = """
             const photoCanvas = document.getElementById('photoCanvas');
             const photoCtx = photoCanvas.getContext('2d');
             const startWebcamBtn = document.getElementById('startWebcam');
-            const switchCameraBtn = document.getElementById('switchCameraBtn'); // Botão de inverter
+            const switchCameraBtn = document.getElementById('switchCameraBtn');
             const takePhotoBtn = document.getElementById('takePhoto');
             const clearPhotoBtn = document.getElementById('clearPhoto');
             const fotoHiddenInput = document.getElementById('foto_cliente_base64');
@@ -599,7 +553,6 @@ HTML_TEMPLATE = """
                     stream.getTracks().forEach(track => track.stop());
                 }
 
-                // Tenta com 'exact' para forçar a câmera traseira em celulares
                 const constraints = {
                     video: { 
                         facingMode: { exact: facingMode } 
@@ -609,7 +562,6 @@ HTML_TEMPLATE = """
                 try {
                     stream = await navigator.mediaDevices.getUserMedia(constraints);
                 } catch (err) {
-                    // Se 'exact' falhar, tenta sem ele (fallback para desktop/laptops)
                     console.warn("Falha ao usar 'exact' facingMode, tentando sem...");
                     const constraintsFallback = {
                         video: { 
@@ -621,14 +573,12 @@ HTML_TEMPLATE = """
                     } catch (err2) {
                         console.error("Erro ao acessar a câmera: ", err2);
                         showStatus('Não foi possível acessar a câmera. Verifique as permissões.', 'erro');
-                        return; // Sai da função se falhar
+                        return;
                     }
                 }
 
-                // Se chegou aqui, o stream está ok
                 video.srcObject = stream;
                 
-                // ATUALIZADO: Espelha o preview da câmera frontal (selfie)
                 if (facingMode === 'user') {
                     video.classList.add('mirrored');
                 } else {
@@ -646,12 +596,12 @@ HTML_TEMPLATE = """
             }
 
             startWebcamBtn.addEventListener('click', () => {
-                startCamera(currentFacingMode); // Inicia com 'user'
+                startCamera(currentFacingMode);
             });
 
             switchCameraBtn.addEventListener('click', () => {
                 currentFacingMode = (currentFacingMode === 'user') ? 'environment' : 'user';
-                startCamera(currentFacingMode); // Troca e reinicia
+                startCamera(currentFacingMode);
             });
 
             takePhotoBtn.addEventListener('click', () => {
@@ -660,7 +610,6 @@ HTML_TEMPLATE = """
 
                 photoCtx.save();
                 
-                // ATUALIZADO: Des-espelha a imagem ao salvar (apenas se for câmera frontal)
                 if (currentFacingMode === 'user') {
                     photoCtx.translate(photoCanvas.width, 0);
                     photoCtx.scale(-1, 1);
@@ -949,23 +898,12 @@ def index():
     return render_template_string(HTML_TEMPLATE, corretores=LISTA_CORRETORES)
 
 
-@app.route('/logo.jpg')
-def serve_logo():
-    """
-    Esta rota decodifica a string Base64 do logo e a serve como uma imagem JPEG.
-    """
-    try:
-        image_data = base64.b64decode(LOGO_BASE64_STRING)
-        return Response(image_data, mimetype='image/jpeg')
-    except Exception as e:
-        print(f"Erro ao servir logo: {e}")
-        return "Erro no logo", 500
+# --- ROTA DO LOGO (REMOVIDA) ---
+# A rota @app.route('/logo.jpg') foi removida pois não é mais necessária.
 
 # -------------------------------------------------------------------
 # --- INICIALIZAÇÃO DO BANCO DE DADOS ---
 # -------------------------------------------------------------------
-# Esta função é executada uma vez quando o Gunicorn (Render) importa o arquivo,
-# garantindo que a tabela exista antes do aplicativo começar a rodar.
 print("Iniciando o banco de dados (verificando/atualizando tabela)...")
 init_db()
 print("Inicialização do banco de dados concluída.")
