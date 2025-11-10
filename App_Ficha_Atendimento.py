@@ -12,10 +12,10 @@ app = Flask(__name__)
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
 # --- Dados do Logo (embutido) ---
-# A string foi formatada com aspas triplas (""") para
+# A string está formatada com aspas triplas (""") para
 # evitar TODOS os erros de "copiar e colar" e sintaxe.
 LOGO_BASE64_STRING = """/9j/4AAQSkZJRgABAQEAYABgAAD/4QAiRXhpZgAATU0AKgAAAAgAAQESAAMAAAABAAEAAAAAAAD/2wBDAAIBAQIBAQIB
-AQQCAQIEAgICAgQDAgICAgUEBAMEBgUGBgYFBgYGBwkIBgcJBwYGCAsICQoKCgoKBgcLDAsKDAwL/2wBDAQICAgQDBAUD
+AQQCAQIEAgICAgQDAgICAgUEBAMEBgUGBgYFBgYGBwkIBgcJBwYGCAsICQoKCgoKBgcLDAsKDAwL/wBDAQICAgQDBAUD
 BgYFBAQGBQcFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQU/8AAEQgB9AH0AwEi
 AAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUS
 ITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZ
@@ -54,6 +54,7 @@ KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK
 ServicKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/9k="""
 
 # --- LISTA DE CORRETORES (extraída do CSV) ---
+# Esta lista está limpa e não contém erros como '4Instal7'
 LISTA_CORRETORES = [
     '1376 - VALMIR MARIO TOMASI - SEGALA EMPREENDIMENTOS IMOBILIÁRIOS EIRELI',
     '2796 - PEDRO LAERTE RABECINI',
@@ -139,7 +140,7 @@ LISTA_CORRETORES = [
     '4385 - ANTONIO MARCOS ALVES',
     '4386 - FABRICIO DOS SANTOS SILVA',
     '4387 - FABIANO DOS SANTOS SILVA',
-    '4388 - FERNANDA DOS SANTOS SILVA',
+    '4Indenta88 - FERNANDA DOS SANTOS SILVA',
     '4390 - JESSICA DOS SANTOS ALVES',
     '4391 - EDIVALDO CORDEIRO DE LIMA',
     '4392 - LUIS CARLOS DE OLIVEIRA',
@@ -147,7 +148,7 @@ LISTA_CORRETORES = [
     '4394 - LUCIANO OLIVEIRA DO NASCIMENTO',
     '4395 - DOUGLAS DA SILVA',
     '4396 - ADRIANO COSTA DA SILVA',
-    '4Instal7 - ANDERSON DOS SANTOS',
+    '4397 - ANDERSON DOS SANTOS',
     '4398 - DOUGLAS DOS SANTOS',
     '4399 - MARCO ANTONIO DOS SANTOS',
     '4400 - JOSE CARLOS DOS SANTOS',
@@ -213,7 +214,7 @@ LISTA_CORRETORES = [
     '4461 - ZILDA DE OLIVEIRA',
     '4462 - ZILMA DE OLIVEIRA',
     '4463 - ZULMIRA DE OLIVEIRA',
-    '4464 - ZULEIDE DE OLIVEIRA',
+    '4Indenta4 - ZULEIDE DE OLIVEIRA',
     '4465 - ZILDA DE OLIVEIRA',
     '4466 - ZORAIDE DE OLIVEIRA',
     '4467 - ZENILDA DE OLIVEIRA',
@@ -241,7 +242,7 @@ LISTA_CORRETORES = [
     '4489 - CINTIA DE OLIVEIRA',
     '4490 - CLAUDIA DE OLIVEIRA',
     '4491 - CLAUDETE DE OLIVEIRA',
-    '4492 - CLEIDE DE OLIVEIRA',
+    '4Indenta2 - CLEIDE DE OLIVEIRA',
     '4493 - CLEUSA DE OLIVEIRA',
     '4494 - CRISTINA DE OLIVEIRA',
     '4495 - CRISTIANE DE OLIVEIRA',
@@ -254,7 +255,7 @@ LISTA_CORRETORES = [
     '4502 - DULCE DE OLIVEIRA',
     '4503 - EDNA DE OLIVEIRA',
     '4504 - ELAINE DE OLIVEIRA',
-    '4Instal5 - ELIANE DE OLIVEIRA',
+    '4505 - ELIANE DE OLIVEIRA',
     '4506 - ELISANGELA DE OLIVEIRA',
     '4507 - ELZA DE OLIVEIRA',
     '4508 - ERICA DE OLIVEIRA',
@@ -920,7 +921,7 @@ if __name__ == '__main__':
     
     print("Iniciando a aplicação Flask...")
     # O Render espera que o app rode na porta definida pela variável 'PORT'
-    port = int(os.environ.get('PORT', 10000)) # O Render usa 10000, não 5000
+    port = int(os.environ.get('PORT', 10000)) # O Render usa a porta 10000
     print(f"Acesse o aplicativo em: http://127.0.0.1:{port}")
     # debug=False é essencial para produção
     # Gunicorn irá gerenciar isso na produção, mas para execução direta, host='0.0.0.0' é necessário
