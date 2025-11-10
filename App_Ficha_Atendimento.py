@@ -12,6 +12,8 @@ app = Flask(__name__)
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
 # --- Dados do Logo (embutido) ---
+# A string foi formatada com aspas triplas (""") para
+# evitar TODOS os erros de "copiar e colar" e sintaxe.
 LOGO_BASE64_STRING = """/9j/4AAQSkZJRgABAQEAYABgAAD/4QAiRXhpZgAATU0AKgAAAAgAAQESAAMAAAABAAEAAAAAAAD/2wBDAAIBAQIBAQIB
 AQQCAQIEAgICAgQDAgICAgUEBAMEBgUGBgYFBgYGBwkIBgcJBwYGCAsICQoKCgoKBgcLDAsKDAwL/2wBDAQICAgQDBAUD
 BgYFBAQGBQcFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQU/8AAEQgB9AH0AwEi
@@ -145,7 +147,7 @@ LISTA_CORRETORES = [
     '4394 - LUCIANO OLIVEIRA DO NASCIMENTO',
     '4395 - DOUGLAS DA SILVA',
     '4396 - ADRIANO COSTA DA SILVA',
-    '4397 - ANDERSON DOS SANTOS',
+    '4Instal7 - ANDERSON DOS SANTOS',
     '4398 - DOUGLAS DOS SANTOS',
     '4399 - MARCO ANTONIO DOS SANTOS',
     '4400 - JOSE CARLOS DOS SANTOS',
@@ -252,7 +254,7 @@ LISTA_CORRETORES = [
     '4502 - DULCE DE OLIVEIRA',
     '4503 - EDNA DE OLIVEIRA',
     '4504 - ELAINE DE OLIVEIRA',
-    '4505 - ELIANE DE OLIVEIRA',
+    '4Instal5 - ELIANE DE OLIVEIRA',
     '4506 - ELISANGELA DE OLIVEIRA',
     '4507 - ELZA DE OLIVEIRA',
     '4508 - ERICA DE OLIVEIRA',
@@ -284,7 +286,7 @@ def init_db():
         return
 
     # A sintaxe de criação da tabela
-    create_table_query = '''
+    create_table_query = """
     CREATE TABLE IF NOT EXISTS atendimentos (
         id SERIAL PRIMARY KEY,
         data_hora TIMESTAMPTZ NOT NULL,
@@ -300,12 +302,12 @@ def init_db():
         assinatura TEXT,
         corretor_atendimento TEXT
     )
-    '''
+    """
     
     # Este comando ALTER TABLE é CRUCIAL para produção.
-    alter_table_query = '''
+    alter_table_query = """
     ALTER TABLE atendimentos ADD COLUMN IF NOT EXISTS corretor_atendimento TEXT;
-    '''
+    """
     
     try:
         with psycopg2.connect(DATABASE_URL) as conn:
@@ -461,10 +463,7 @@ HTML_TEMPLATE = """
                             <option value="{{ corretor }}">{{ corretor }}</option>
                             {% endfor %}
                             
-                            <!-- A OPÇÃO "OUTRO" FOI REMOVIDA -->
                         </select>
-                        
-                        <!-- O CAMPO DE TEXTO "OUTRO" FOI REMOVIDO -->
                     </div>
 
                     <!-- Foto do Cliente -->
@@ -865,13 +864,13 @@ def index():
                 return jsonify({'success': False, 'message': 'Nome, Telefone e Corretor são obrigatórios.'}), 400
 
             # --- QUERY DE INSERÇÃO ---
-            insert_query = '''
+            insert_query = """
                 INSERT INTO atendimentos (
                     data_hora, nome, telefone, rede_social, abordagem_inicial, 
                     esteve_plantao, foi_atendido, nome_corretor, autoriza_transmissao, 
                     foto_cliente, assinatura, corretor_atendimento
                 ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            '''
+            """
             
             values = (
                 data_hora, nome, telefone, rede_social, abordagem_inicial,
@@ -887,6 +886,7 @@ def index():
 
         except Exception as e:
             print(f"Erro ao salvar no banco: {e}")
+            # Retorna a mensagem de erro específica do banco
             return jsonify({'success': False, 'message': f"Erro interno do servidor: {e}"}), 500
 
     # Método GET: Exibe a página e passa a lista de corretores para o template
@@ -899,7 +899,8 @@ def serve_logo():
     Esta rota decodifica a string Base64 do logo e a serve como uma imagem JPEG.
     """
     try:
-        # CORREÇÃO: Corrigido de base66 para base64
+        # CORREÇÃO: O nome da variável está correto (LOGO_BASE64_STRING)
+        # e a função é base64.b64decode
         image_data = base64.b64decode(LOGO_BASE64_STRING)
         return Response(image_data, mimetype='image/jpeg')
     except Exception as e:
@@ -918,6 +919,9 @@ if __name__ == '__main__':
     init_db()
     
     print("Iniciando a aplicação Flask...")
-    port = int(os.environ.get('PORT', 5000))
+    # O Render espera que o app rode na porta definida pela variável 'PORT'
+    port = int(os.environ.get('PORT', 10000)) # O Render usa 10000, não 5000
     print(f"Acesse o aplicativo em: http://127.0.0.1:{port}")
+    # debug=False é essencial para produção
+    # Gunicorn irá gerenciar isso na produção, mas para execução direta, host='0.0.0.0' é necessário
     app.run(host='0.0.0.0', port=port, debug=False)
