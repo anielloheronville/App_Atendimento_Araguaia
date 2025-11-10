@@ -930,30 +930,3 @@ if __name__ == '__main__':
     port = int(os.environ.get('PORT', 10000)) # O Render usa a porta 10000
     print(f"Acesse o aplicativo em: http://127.0.0.1:{port}")
     app.run(host='0.0.0.0', port=port, debug=False)
-```
-
-**Passo 2: Simplifique seu "Build Command" no Render**
-
-Como o `init_db()` agora é executado automaticamente, podemos simplificar o "Build Command".
-
-1.  Vá para o seu "Web Service" no Render.
-2.  Vá para a aba **"Settings"**.
-3.  Mude o **Build Command** para apenas isto:
-    ```
-    pip install -r requirements.txt
-    ```
-    (Nós removemos a parte `&& python -c ...` porque ela não é mais necessária).
-4.  Salve as mudanças.
-
-**Passo 3: Faça o Deploy Final**
-
-1.  Envie o `App_Ficha_Atendimento.py` atualizado para o seu Git.
-2.  Vá para o seu Web Service no Render e clique em **"Manual Deploy"** > **"Deploy latest commit"**.
-
-Agora, observe o log do **"Deploy"**. Você verá as mensagens:
-```
-Iniciando o banco de dados (verificando/atualizando tabela)...
-1. Criando/Verificando tabela 'atendimentos'...
-2. Garantindo que a coluna 'corretor_atendimento' existe...
-Banco de dados verificado/atualizado com sucesso.
-Inicialização do banco de dados concluída.
