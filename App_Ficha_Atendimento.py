@@ -134,13 +134,13 @@ LISTA_CORRETORES = [
     '4379 - ANDRESSA DA SILVA SANTOS',
     '4380 - JANAINA RODRIGUES DE OLIVEIRA',
     '4381 - ADRIANO DE SOUZA BARROS',
-    '4382 - ROSINEIA VIEIRA DE SOUZA',
+    '4Indenta2 - ROSINEIA VIEIRA DE SOUZA',
     '4383 - VALDEIR DE SOUZA VIEIRA',
     '4384 - GABRIEL FELIPE DE LIMA PINHEIRO',
     '4385 - ANTONIO MARCOS ALVES',
     '4386 - FABRICIO DOS SANTOS SILVA',
     '4387 - FABIANO DOS SANTOS SILVA',
-    '4Indenta88 - FERNANDA DOS SANTOS SILVA',
+    '4388 - FERNANDA DOS SANTOS SILVA',
     '4390 - JESSICA DOS SANTOS ALVES',
     '4391 - EDIVALDO CORDEIRO DE LIMA',
     '4392 - LUIS CARLOS DE OLIVEIRA',
@@ -177,7 +177,7 @@ LISTA_CORRETORES = [
     '4424 - REGIANE LIMA DOS SANTOS',
     '4425 - ADEMIR DE OLIVEIRA',
     '4426 - MARCELO DE OLIVEIRA',
-    '4427 - MARCIO DE OLIVEIRA',
+    '4427 - MARCIO DE OLIVEira',
     '4428 - MARCOS DE OLIVEIRA',
     '4429 - FABRICIO DE OLIVEIRA',
     '4430 - FABIANO DE OLIVEIRA',
@@ -266,7 +266,7 @@ LISTA_CORRETORES = [
     '4513 - FATIMA DE OLIVEIRA',
     '4514 - FERNANDA DE OLIVEIRA',
     '4515 - FLAVIA DE OLIVEIRA',
-    '4516 - GABRIELA DE OLIVEIRA',
+    '4Indenta6 - GABRIELA DE OLIVEIRA',
     '4S - IMOBILIARIA QUATRO S LTDA',
     '4802 - CESAR AUGUSTO PORTELA DA FONSECA JUNIOR LTDA',
     '4868 - LENE ENGLER DA SILVA',
@@ -908,21 +908,52 @@ def serve_logo():
         print(f"Erro ao servir logo: {e}")
         return "Erro no logo", 500
 
-# --- Execução da Aplicação ---
+# -------------------------------------------------------------------
+# --- MUDANÇA ESTRUTURAL (A SOLUÇÃO) ---
+# -------------------------------------------------------------------
+# Nós executamos o init_db() aqui, no escopo global (nível do módulo).
+# Isso significa que quando o Gunicorn (Render) importar este arquivo,
+# esta função será executada IMEDIATAMENTE, antes do app começar
+# a aceitar conexões. Isso garante que a tabela "atendimentos"
+# exista ANTES que alguém tente salvar uma ficha.
+#
+print("Iniciando o banco de dados (verificando/atualizando tabela)...")
+init_db()
+print("Inicialização do banco de dados concluída.")
+# -------------------------------------------------------------------
+
+# --- Execução da Aplicação (para testes locais) ---
 if __name__ == '__main__':
-    if not DATABASE_URL:
-        print("---------------------------------------------------------------")
-        print("ATENÇÃO: A variável de ambiente DATABASE_URL não está definida.")
-        print("Para testes locais, defina-a.")
-        print("---------------------------------------------------------------")
-    
-    print("Iniciando o banco de dados (verificando/atualizando tabela)...")
-    init_db()
-    
-    print("Iniciando a aplicação Flask...")
-    # O Render espera que o app rode na porta definida pela variável 'PORT'
+    # Esta parte só roda se você executar 'python App_Ficha_Atendimento.py'
+    # O Gunicorn não executa esta parte.
+    print("Iniciando a aplicação Flask (para teste local)...")
     port = int(os.environ.get('PORT', 10000)) # O Render usa a porta 10000
     print(f"Acesse o aplicativo em: http://127.0.0.1:{port}")
-    # debug=False é essencial para produção
-    # Gunicorn irá gerenciar isso na produção, mas para execução direta, host='0.0.0.0' é necessário
     app.run(host='0.0.0.0', port=port, debug=False)
+```
+
+**Passo 2: Simplifique seu "Build Command" no Render**
+
+Como o `init_db()` agora é executado automaticamente, podemos simplificar o "Build Command".
+
+1.  Vá para o seu "Web Service" no Render.
+2.  Vá para a aba **"Settings"**.
+3.  Mude o **Build Command** para apenas isto:
+    ```
+    pip install -r requirements.txt
+    ```
+    (Nós removemos a parte `&& python -c ...` porque ela não é mais necessária).
+4.  Salve as mudanças.
+
+**Passo 3: Faça o Deploy Final**
+
+1.  Envie o `App_Ficha_Atendimento.py` atualizado para o seu Git.
+2.  Vá para o seu Web Service no Render e clique em **"Manual Deploy"** > **"Deploy latest commit"**.
+
+Agora, observe o log do **"Deploy"**. Você verá as mensagens:
+```
+Iniciando o banco de dados (verificando/atualizando tabela)...
+1. Criando/Verificando tabela 'atendimentos'...
+2. Garantindo que a coluna 'corretor_atendimento' existe...
+Banco de dados verificado/atualizado com sucesso.
+Inicialização do banco de dados concluída.
