@@ -134,7 +134,7 @@ LISTA_CORRETORES = [
     '4379 - ANDRESSA DA SILVA SANTOS',
     '4380 - JANAINA RODRIGUES DE OLIVEIRA',
     '4381 - ADRIANO DE SOUZA BARROS',
-    '4Indenta2 - ROSINEIA VIEIRA DE SOUZA',
+    '4382 - ROSINEIA VIEIRA DE SOUZA',
     '4383 - VALDEIR DE SOUZA VIEIRA',
     '4384 - GABRIEL FELIPE DE LIMA PINHEIRO',
     '4385 - ANTONIO MARCOS ALVES',
@@ -177,7 +177,7 @@ LISTA_CORRETORES = [
     '4424 - REGIANE LIMA DOS SANTOS',
     '4425 - ADEMIR DE OLIVEIRA',
     '4426 - MARCELO DE OLIVEIRA',
-    '4427 - MARCIO DE OLIVEira',
+    '4427 - MARCIO DE OLIVEIRA',
     '4428 - MARCOS DE OLIVEIRA',
     '4429 - FABRICIO DE OLIVEIRA',
     '4430 - FABIANO DE OLIVEIRA',
@@ -203,7 +203,7 @@ LISTA_CORRETORES = [
     '4450 - VALDINEI DE OLIVEIRA',
     '4451 - VALMIR DE OLIVEIRA',
     '4452 - VALTER DE OLIVEIRA',
-    '4453 - VANILDO DE OLIVEIRA',
+    '4Address - VANILDO DE OLIVEIRA',
     '4454 - VILSON DE OLIVEIRA',
     '4455 - ZENILDO DE OLIVEIRA',
     '4456 - ZENIR DE OLIVEIRA',
@@ -214,7 +214,7 @@ LISTA_CORRETORES = [
     '4461 - ZILDA DE OLIVEIRA',
     '4462 - ZILMA DE OLIVEIRA',
     '4463 - ZULMIRA DE OLIVEIRA',
-    '4Indenta4 - ZULEIDE DE OLIVEIRA',
+    '4464 - ZULEIDE DE OLIVEIRA',
     '4465 - ZILDA DE OLIVEIRA',
     '4466 - ZORAIDE DE OLIVEIRA',
     '4467 - ZENILDA DE OLIVEIRA',
@@ -225,7 +225,7 @@ LISTA_CORRETORES = [
     '4472 - ANDREIA DE OLIVEIRA',
     '4473 - ALZIRA DE OLIVEIRA',
     '4474 - AMANDA DE OLIVEIRA',
-    '4475 - APARECIDA DE OLIVEIRA',
+    '4Music - APARECIDA DE OLIVEIRA',
     '4476 - ARIANE DE OLIVEIRA',
     '4477 - AUGUSTA DE OLIVEIRA',
     '4478 - AUREA DE OLIVEIRA',
@@ -242,7 +242,7 @@ LISTA_CORRETORES = [
     '4489 - CINTIA DE OLIVEIRA',
     '4490 - CLAUDIA DE OLIVEIRA',
     '4491 - CLAUDETE DE OLIVEIRA',
-    '4Indenta2 - CLEIDE DE OLIVEIRA',
+    '4492 - CLEIDE DE OLIVEIRA',
     '4493 - CLEUSA DE OLIVEIRA',
     '4494 - CRISTINA DE OLIVEIRA',
     '4495 - CRISTIANE DE OLIVEIRA',
@@ -255,7 +255,7 @@ LISTA_CORRETORES = [
     '4502 - DULCE DE OLIVEIRA',
     '4503 - EDNA DE OLIVEIRA',
     '4504 - ELAINE DE OLIVEIRA',
-    '4505 - ELIANE DE OLIVEIRA',
+    '4Music - ELIANE DE OLIVEIRA',
     '4506 - ELISANGELA DE OLIVEIRA',
     '4507 - ELZA DE OLIVEIRA',
     '4508 - ERICA DE OLIVEIRA',
@@ -266,7 +266,7 @@ LISTA_CORRETORES = [
     '4513 - FATIMA DE OLIVEIRA',
     '4514 - FERNANDA DE OLIVEIRA',
     '4515 - FLAVIA DE OLIVEIRA',
-    '4Indenta6 - GABRIELA DE OLIVEIRA',
+    '4516 - GABRIELA DE OLIVEIRA',
     '4S - IMOBILIARIA QUATRO S LTDA',
     '4802 - CESAR AUGUSTO PORTELA DA FONSECA JUNIOR LTDA',
     '4868 - LENE ENGLER DA SILVA',
@@ -399,6 +399,12 @@ HTML_TEMPLATE = """
             border-radius: 0.375rem;
             background-color: #5a616c;
         }
+        
+        /* NOVO: Estilo para o preview de vídeo espelhado (câmera frontal) */
+        .video-preview.mirrored {
+            transform: scaleX(-1);
+        }
+        
         /* Ocultar elementos */
         .hidden {
             display: none;
@@ -454,16 +460,11 @@ HTML_TEMPLATE = """
                     <!-- CAMPO ATUALIZADO: CORRETOR (ATENDIMENTO) -->
                     <div>
                         <label for="corretor_atendimento" class="block text-sm font-medium mb-2">Corretor (Atendimento)*</label>
-                        <!-- O input foi substituído por este select -->
                         <select id="corretor_atendimento" name="corretor_atendimento" class="form-select" required>
-                            <!-- A primeira opção força o usuário a escolher um nome -->
                             <option value="" disabled selected>Selecione seu nome...</option>
-                            
-                            <!-- Loop Jinja2 para popular os corretores -->
                             {% for corretor in corretores %}
                             <option value="{{ corretor }}">{{ corretor }}</option>
                             {% endfor %}
-                            
                         </select>
                     </div>
 
@@ -476,6 +477,8 @@ HTML_TEMPLATE = """
                             
                             <div class="flex flex-col gap-2">
                                 <button type="button" id="startWebcam" class="text-sm text-white bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">Abrir Câmera</button>
+                                <!-- NOVO BOTÃO: Inverter Câmera -->
+                                <button type="button" id="switchCameraBtn" class="text-sm text-white bg-gray-600 px-3 py-1 rounded hover:bg-gray-700 hidden">Inverter Câmera</button>
                                 <button type="button" id="takePhoto" class="text-sm text-white bg-green-600 px-3 py-1 rounded hover:bg-green-700 hidden">Tirar Foto</button>
                                 <button type="button" id="clearPhoto" class="text-sm text-gray-300 underline hidden">Limpar Foto</button>
                             </div>
@@ -501,7 +504,6 @@ HTML_TEMPLATE = """
                             </div>
                         </div>
                         
-                        <!-- Campo Condicional -->
                         <div id="campoNomeCorretor" class="hidden">
                             <label for="nome_corretor" class="block text-sm font-medium mb-2">Se sim, qual o nome (corretor anterior):</label>
                             <input type="text" id="nome_corretor" name="nome_corretor" class="form-input">
@@ -533,9 +535,7 @@ HTML_TEMPLATE = """
                     <button type="submit" id="saveButton" class="btn-salvar w-full md:w-auto">Salvar Ficha</button>
                 </div>
 
-                <!-- Mensagem de Status -->
                 <div id="statusMessage" class="md:col-span-2 text-center p-2 rounded hidden"></div>
-                
             </form>
         </div>
     </main>
@@ -551,32 +551,34 @@ HTML_TEMPLATE = """
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // --- INICIALIZAÇÃO ---
             const form = document.getElementById('preAtendimentoForm');
             const statusMessage = document.getElementById('statusMessage');
 
             // --- DATA ATUAL ---
             function atualizarDataHora() {
                 const today = new Date();
-                // Formato: DD/MM/AAAA HH:MM:SS
                 const dataFormatada = today.toLocaleDateString('pt-BR');
                 const horaFormatada = today.toLocaleTimeString('pt-BR');
                 document.getElementById('dataAtual').innerText = `Sorriso/MT, ${dataFormatada} ${horaFormatada}`;
                 document.getElementById('currentYear').innerText = today.getFullYear();
             }
             atualizarDataHora();
-            setInterval(atualizarDataHora, 1000); // Atualiza a hora a cada segundo
+            setInterval(atualizarDataHora, 1000);
 
             // --- CÂMERA (FOTO DO CLIENTE) ---
             const video = document.getElementById('videoPreview');
             const photoCanvas = document.getElementById('photoCanvas');
             const photoCtx = photoCanvas.getContext('2d');
             const startWebcamBtn = document.getElementById('startWebcam');
+            const switchCameraBtn = document.getElementById('switchCameraBtn'); // Novo botão
             const takePhotoBtn = document.getElementById('takePhoto');
             const clearPhotoBtn = document.getElementById('clearPhoto');
             const fotoHiddenInput = document.getElementById('foto_cliente_base64');
+            
             let stream = null;
+            let currentFacingMode = 'user'; // 'user' = frontal, 'environment' = traseira
 
+            // Desenha um avatar placeholder
             function drawAvatarPlaceholder() {
                 photoCtx.fillStyle = '#b0b0b0';
                 photoCtx.fillRect(0, 0, photoCanvas.width, photoCanvas.height);
@@ -590,32 +592,82 @@ HTML_TEMPLATE = """
             }
             drawAvatarPlaceholder();
 
-            startWebcamBtn.addEventListener('click', async () => {
+            // Função principal para iniciar/trocar a câmera
+            async function startCamera(facingMode) {
+                // Para o stream antigo (se houver) antes de trocar
+                if (stream) {
+                    stream.getTracks().forEach(track => track.stop());
+                }
+
+                const constraints = {
+                    video: { 
+                        facingMode: facingMode 
+                    }
+                };
+
                 try {
-                    stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+                    stream = await navigator.mediaDevices.getUserMedia(constraints);
                     video.srcObject = stream;
+                    
+                    // Espelha o preview da câmera frontal (selfie)
+                    if (facingMode === 'user') {
+                        video.classList.add('mirrored');
+                    } else {
+                        video.classList.remove('mirrored');
+                    }
+
                     video.classList.remove('hidden');
                     photoCanvas.classList.add('hidden');
                     takePhotoBtn.classList.remove('hidden');
                     clearPhotoBtn.classList.remove('hidden');
+                    switchCameraBtn.classList.remove('hidden'); // Mostra o botão de inverter
                     startWebcamBtn.classList.add('hidden');
+                    
+                    currentFacingMode = facingMode; // Atualiza o estado
                 } catch (err) {
                     console.error("Erro ao acessar a câmera: ", err);
                     showStatus('Não foi possível acessar a câmera. Verifique as permissões.', 'erro');
                 }
+            }
+
+            startWebcamBtn.addEventListener('click', () => {
+                startCamera(currentFacingMode); // Inicia com a câmera padrão ('user')
+            });
+
+            switchCameraBtn.addEventListener('click', () => {
+                // Inverte o modo
+                currentFacingMode = (currentFacingMode === 'user') ? 'environment' : 'user';
+                startCamera(currentFacingMode); // Reinicia a câmera com o novo modo
             });
 
             takePhotoBtn.addEventListener('click', () => {
                 photoCanvas.width = video.videoWidth;
                 photoCanvas.height = video.videoHeight;
+
+                // Salva o estado atual do canvas
+                photoCtx.save();
+                
+                // CORREÇÃO: Des-espelha a imagem ANTES de desenhar
+                // Apenas se for a câmera frontal ('user')
+                if (currentFacingMode === 'user') {
+                    photoCtx.translate(photoCanvas.width, 0);
+                    photoCtx.scale(-1, 1);
+                }
+                
+                // Desenha a imagem (agora corrigida)
                 photoCtx.drawImage(video, 0, 0, photoCanvas.width, photoCanvas.height);
+                
+                // Restaura o estado do canvas
+                photoCtx.restore();
                 
                 fotoHiddenInput.value = photoCanvas.toDataURL('image/jpeg', 0.8);
 
                 video.classList.add('hidden');
                 photoCanvas.classList.remove('hidden');
                 takePhotoBtn.classList.add('hidden');
+                switchCameraBtn.classList.add('hidden'); // Esconde o botão de inverter
                 
+                // Para o stream após tirar a foto
                 if (stream) {
                     stream.getTracks().forEach(track => track.stop());
                     stream = null;
@@ -627,10 +679,11 @@ HTML_TEMPLATE = """
                 drawAvatarPlaceholder();
                 fotoHiddenInput.value = '';
                 video.classList.add('hidden');
+                video.classList.remove('mirrored'); // Reseta o espelhamento
                 photoCanvas.classList.remove('hidden');
                 startWebcamBtn.classList.remove('hidden');
                 takePhotoBtn.classList.add('hidden');
-                clearPhotoBtn.classList.add('hidden');
+                switchCameraBtn.classList.add('hidden');
                 if (stream) {
                     stream.getTracks().forEach(track => track.stop());
                     stream = null;
@@ -645,17 +698,15 @@ HTML_TEMPLATE = """
             function toggleNomeCorretor() {
                 if (atendidoSim.checked) {
                     campoNomeCorretor.classList.remove('hidden');
-                    document.getElementById('nome_corretor').required = false; // Este não é obrigatório
+                    document.getElementById('nome_corretor').required = false;
                 } else {
                     campoNomeCorretor.classList.add('hidden');
                     document.getElementById('nome_corretor').required = false;
-                    document.getElementById('nome_corretor').value = ''; // Limpa o campo
+                    document.getElementById('nome_corretor').value = '';
                 }
             }
             atendidoSim.addEventListener('change', toggleNomeCorretor);
             atendidoNao.addEventListener('change', toggleNomeCorretor);
-
-            // --- LÓGICA DO CAMPO "OUTRO" FOI REMOVIDA ---
 
             // --- ASSINATURA CANVAS ---
             const sigCanvas = document.getElementById('signatureCanvas');
@@ -669,7 +720,7 @@ HTML_TEMPLATE = """
                 const rect = sigCanvas.getBoundingClientRect();
                 sigCanvas.width = rect.width;
                 sigCanvas.height = rect.height;
-                sigCtx.strokeStyle = "#FFFFFF"; // Redefine o estilo após redimensionar
+                sigCtx.strokeStyle = "#FFFFFF";
                 sigCtx.lineWidth = 2;
                 
                 if (dirty && assinaturaHiddenInput.value) {
@@ -681,7 +732,7 @@ HTML_TEMPLATE = """
                 }
             }
             window.addEventListener('resize', resizeCanvas);
-            resizeCanvas(); // Chamada inicial
+            resizeCanvas();
 
             function getMousePos(canvas, evt) {
                 const rect = canvas.getBoundingClientRect();
@@ -747,11 +798,8 @@ HTML_TEMPLATE = """
                 saveButton.disabled = true;
                 saveButton.innerText = 'Salvando...';
 
-                // Validação ATUALIZADA
                 const nome = document.getElementById('nome').value;
                 const telefone = document.getElementById('telefone').value;
-                
-                // A lógica do "OUTRO" foi removida
                 const corretor_final = document.getElementById('corretor_atendimento').value;
                 
                 if (!nome || !telefone || !corretor_final || corretor_final === "") {
@@ -766,8 +814,6 @@ HTML_TEMPLATE = """
                 formData.forEach((value, key) => {
                     data[key] = value;
                 });
-                
-                // A lógica de "OUTRO" foi removida daqui
                 
                 data.esteve_plantao = data.esteve_plantao === 'sim' ? 1 : 0;
                 data.foi_atendido = data.foi_atendido === 'sim' ? 1 : 0;
@@ -790,7 +836,7 @@ HTML_TEMPLATE = """
                         showStatus('Ficha salva com sucesso!', 'sucesso');
                         form.reset();
                         clearSignatureBtn.click();
-                        clearPhotoBtn.click();
+                        clearPhotoBtn.click(); // Isso já lida com o reset da câmera
                         toggleNomeCorretor();
                     } else {
                         showStatus(`Erro ao salvar: ${result.message}`, 'erro');
@@ -845,7 +891,7 @@ def index():
             # --- DADOS COLETADOS ---
             nome = data.get('nome')
             telefone = data.get('telefone')
-            corretor_atendimento = data.get('corretor_atendimento') # O JS não tem mais lógica "OUTRO"
+            corretor_atendimento = data.get('corretor_atendimento')
             
             rede_social = data.get('rede_social')
             abordagem_inicial = data.get('abordagem_inicial')
@@ -900,8 +946,6 @@ def serve_logo():
     Esta rota decodifica a string Base64 do logo e a serve como uma imagem JPEG.
     """
     try:
-        # CORREÇÃO: O nome da variável está correto (LOGO_BASE64_STRING)
-        # e a função é base64.b64decode
         image_data = base64.b64decode(LOGO_BASE64_STRING)
         return Response(image_data, mimetype='image/jpeg')
     except Exception as e:
@@ -909,14 +953,10 @@ def serve_logo():
         return "Erro no logo", 500
 
 # -------------------------------------------------------------------
-# --- MUDANÇA ESTRUTURAL (A SOLUÇÃO) ---
+# --- INICIALIZAÇÃO DO BANCO DE DADOS ---
 # -------------------------------------------------------------------
-# Nós executamos o init_db() aqui, no escopo global (nível do módulo).
-# Isso significa que quando o Gunicorn (Render) importar este arquivo,
-# esta função será executada IMEDIATAMENTE, antes do app começar
-# a aceitar conexões. Isso garante que a tabela "atendimentos"
-# exista ANTES que alguém tente salvar uma ficha.
-#
+# Esta função é executada uma vez quando o Gunicorn (Render) importa o arquivo,
+# garantindo que a tabela exista antes do aplicativo começar a rodar.
 print("Iniciando o banco de dados (verificando/atualizando tabela)...")
 init_db()
 print("Inicialização do banco de dados concluída.")
@@ -924,8 +964,6 @@ print("Inicialização do banco de dados concluída.")
 
 # --- Execução da Aplicação (para testes locais) ---
 if __name__ == '__main__':
-    # Esta parte só roda se você executar 'python App_Ficha_Atendimento.py'
-    # O Gunicorn não executa esta parte.
     print("Iniciando a aplicação Flask (para teste local)...")
     port = int(os.environ.get('PORT', 10000)) # O Render usa a porta 10000
     print(f"Acesse o aplicativo em: http://127.0.0.1:{port}")
